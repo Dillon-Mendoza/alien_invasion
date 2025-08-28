@@ -50,12 +50,12 @@ class AlienInvasion:
 
     def run_game(self):
         """Start the main loop for the game"""
-        self.background_music.play()
+        self.background_music.play(loops = 100)
         while True:
             self._check_events()
 
             if self.game_active:
-                self.background_music.set_volume(0.5)
+                self.background_music.set_volume(0.3)
                 self.ship.update()
                 self._update_bullets()
                 self._update_aliens()
@@ -112,6 +112,7 @@ class AlienInvasion:
             self._fire_bullet()
             if pygame.K_SPACE:
                 self.blaster_sound.play()
+                self.blaster_sound.set_volume(0.75)
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
@@ -178,9 +179,10 @@ class AlienInvasion:
         """Respond to the ship being hit by an alien"""
         if self.stats.ships_left > 0:
             # Decrement ships_left, and update scoreboard
+            self.background_music.stop()
+            self.lost_life_sound.play()
             self.stats.ships_left -= 1
             self.sb.prep_ships()
-            self.lost_life_sound.play()
 
             # Get rid of any remaining aliens and bullets
             self.bullets.empty()
@@ -191,7 +193,8 @@ class AlienInvasion:
             self.ship.center_ship()
 
             # Pause
-            sleep(0.5)
+            sleep(2.25)
+            self.background_music.play(loops = 100)
         else:
             self.game_active = False
             pygame.mouse.set_visible(True)
