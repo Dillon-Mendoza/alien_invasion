@@ -50,10 +50,12 @@ class AlienInvasion:
 
     def run_game(self):
         """Start the main loop for the game"""
+        self.background_music.play()
         while True:
             self._check_events()
 
             if self.game_active:
+                self.background_music.set_volume(0.5)
                 self.ship.update()
                 self._update_bullets()
                 self._update_aliens()
