@@ -37,6 +37,12 @@ class AlienInvasion:
         # Set the background color.
         self.bg_color = (230, 230, 230)
 
+        # Load music and sound effects
+        self.background_music = pygame.mixer.Sound('sounds/background_music.wav')
+        self.blaster_sound = pygame.mixer.Sound('sounds/blaster.wav')
+        self.alien_hit_sound = pygame.mixer.Sound('sounds/alien_hit.wav')
+        self.lost_life_sound = pygame.mixer.Sound('sounds/lost_life.wav')
+
         # Start Alien Invasion in an inactive state
         self.game_active = False
         # Make the Play button
@@ -102,6 +108,8 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+            if pygame.K_SPACE:
+                self.blaster_sound.play()
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
@@ -139,6 +147,8 @@ class AlienInvasion:
                 self.stats.score += self.settings.aliens_points * len(aliens)
                 self.sb.prep_score()
                 self.sb.check_high_score()
+                if collisions:
+                    self.alien_hit_sound.play()
         
         if not self.aliens:
             # Destroy existing bullets and create new fleet
@@ -168,6 +178,7 @@ class AlienInvasion:
             # Decrement ships_left, and update scoreboard
             self.stats.ships_left -= 1
             self.sb.prep_ships()
+            self.lost_life_sound.play()
 
             # Get rid of any remaining aliens and bullets
             self.bullets.empty()

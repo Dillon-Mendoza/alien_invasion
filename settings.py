@@ -44,6 +44,7 @@ class Settings:
         self.ship_speed *= self.speedup_scale
         self.bullets_allowed *=self.speedup_scale
         self.bullet_speed *= self.speedup_scale
+        self.bullets_allowed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
 
         self.alien_points = int(self.aliens_points * self.score_scale)
