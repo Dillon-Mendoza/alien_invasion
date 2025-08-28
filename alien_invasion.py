@@ -38,7 +38,7 @@ class AlienInvasion:
         self.bg_color = (230, 230, 230)
 
         # Load music and sound effects
-        #background_music = pygame.mixer.music('sounds/background_music.wav')
+        self.background_music = pygame.mixer.Sound('sounds/background_music.wav')
         self.blaster_sound = pygame.mixer.Sound('sounds/blaster.wav')
         self.alien_hit_sound = pygame.mixer.Sound('sounds/alien_hit.wav')
         self.lost_life_sound = pygame.mixer.Sound('sounds/lost_life.wav')
