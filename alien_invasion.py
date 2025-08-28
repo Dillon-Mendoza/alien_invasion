@@ -152,6 +152,7 @@ class AlienInvasion:
                 self.sb.check_high_score()
                 if collisions:
                     self.alien_hit_sound.play()
+                    self.alien_hit_sound.set_volume(0.75)
         
         if not self.aliens:
             # Destroy existing bullets and create new fleet
