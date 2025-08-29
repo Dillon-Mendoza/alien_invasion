@@ -110,9 +110,6 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
-            if pygame.K_SPACE and self.game_active == True:
-                self.blaster_sound.play()
-                self.blaster_sound.set_volume(0.75)
 
     def _check_keyup_events(self, event):
         """Respond to key releases."""
@@ -123,9 +120,16 @@ class AlienInvasion:
 
     def _fire_bullet(self):
         """Create a new bullet and add it to the bullets group"""
+        if not self.game_active:
+            return
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+            self.blaster_sound.play()
+            self.blaster_sound.set_volume(0.75)
+        else:
+            # Stop blaster sound if no more bullets can be fired
+            self.blaster_sound.stop()
 
     def _update_bullets(self):
         """Update position of bullets and get rid of old bullets"""
