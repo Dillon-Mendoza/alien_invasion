@@ -110,7 +110,7 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
-            if pygame.K_SPACE:
+            if pygame.K_SPACE and self.game_active == True:
                 self.blaster_sound.play()
                 self.blaster_sound.set_volume(0.75)
 
